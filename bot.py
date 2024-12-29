@@ -5,19 +5,19 @@ import re
 import aiohttp  # Using aiohttp for async HTTP requests
 from web import keep_alive
 
-BOT_TOKEN = "6979408047:AAGYP989LenPJOupCbqQ85FnSrnTUgDTksM"
+BOT_TOKEN = "7289544815:AAHazCIKjEdiDcJb9LneDGGia-5Xpghbwl8"
 BASE_URL = "https://opabhik.serv00.net/Watch.php?url="
 TERABOX_PATTERN = r"https?://(?:\w+\.)?(terabox|1024terabox|freeterabox|teraboxapp|tera|teraboxlink|mirrorbox|nephobox|1024tera|momerybox|tibibox|terasharelink|teraboxshare|terafileshare)\.\w+"
-LOG_CHANNEL_ID = "-1002095112878"  # Replace with your actual log channel's username or chat ID
+LOG_CHANNEL_ID = "-1001564742493"  # Replace with your actual log channel's username or chat ID
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Start command to welcome the user with an image and button."""
     
     # URL or path to the image
-    image_url = "https://telegra.ph/file/504babe67ae701cb458f8.jpg"  # Replace with the URL or local path
+    image_url = "https://envs.sh/ozm.jpg"  # Replace with the URL or local path
     
     # Button that will be displayed below the image
-    button = InlineKeyboardButton("✨ Join Channel", url="https://t.me/MODSMAVI")  # Replace with your desired URL
+    button = InlineKeyboardButton("✨ Join Channel", url="https://t.me/+Q8sRUuL-hzUwZGM1")  # Replace with your desired URL
     
     # Creating an inline keyboard with the button
     reply_markup = InlineKeyboardMarkup([[button]])
