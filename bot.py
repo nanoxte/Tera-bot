@@ -9,7 +9,7 @@ BOT_TOKEN = "7289544815:AAHazCIKjEdiDcJb9LneDGGia-5Xpghbwl8"
 BASE_URL = "https://opabhik.serv00.net/Watch.php?url="
 TERABOX_PATTERN = r"https?://(?:\w+\.)?(terabox|1024terabox|freeterabox|teraboxapp|tera|teraboxlink|mirrorbox|nephobox|1024tera|momerybox|tibibox|terasharelink|teraboxshare|terafileshare)\.\w+"
 LOG_CHANNEL_ID = "-1001564742493"  # Replace with your actual log channel's username or chat ID
-FSubLink = "https://t.me/your_channel_username"  # Replace with your actual channel link
+FSubLink = "https://t.me/+Q8sRUuL-hzUwZGM1"  # Replace with your actual channel link
 
 async def check_subscription(user_id, bot):
     """Check if a user is a member of the required channel."""
