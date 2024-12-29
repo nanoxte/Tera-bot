@@ -9,15 +9,17 @@ BOT_TOKEN = "7289544815:AAHazCIKjEdiDcJb9LneDGGia-5Xpghbwl8"
 BASE_URL = "https://opabhik.serv00.net/Watch.php?url="
 TERABOX_PATTERN = r"https?://(?:\w+\.)?(terabox|1024terabox|freeterabox|teraboxapp|tera|teraboxlink|mirrorbox|nephobox|1024tera|momerybox|tibibox|terasharelink|teraboxshare|terafileshare)\.\w+"
 LOG_CHANNEL_ID = "-1001564742493"  # Replace with your actual log channel's username or chat ID
-FSubLink = "https://t.me/+Q8sRUuL-hzUwZGM1"  # Replace this with your private or public channel link
+FSubLink = "https://t.me/your_channel_username"  # Replace with your actual channel link
 
 async def check_subscription(user_id, bot):
     """Check if a user is a member of the required channel."""
     try:
         channel_username = FSubLink.split("/")[-1]  # Extract the channel username from the link
         member = await bot.get_chat_member(channel_username, user_id)
+        print(f"User {user_id} subscription status: {member.status}")  # Debugging
         return member.status in ["member", "administrator", "creator"]
-    except Exception:
+    except Exception as e:
+        print(f"Error in check_subscription: {e}")  # Debugging
         return False
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -36,14 +38,42 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     image_url = "https://envs.sh/ozm.jpg"  # Replace with the URL or local path
-    button = InlineKeyboardButton("✨ Join Channel", url=FSubLink)
-    reply_markup = InlineKeyboardMarkup([[button]])
-
     await update.message.reply_photo(
         photo=image_url,
         caption="👋 Hi! Welcome to the bot! Send a Terabox link, and I’ll create a stream link for you.",
-        reply_markup=reply_markup,
     )
+
+async def fetch_file_details(url):
+    """Fetch file name, thumbnail, and size from the provided URL asynchronously."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers) as response:
+                response.raise_for_status()
+                page_content = await response.text()
+
+        soup = BeautifulSoup(page_content, "html.parser")
+
+        file_name = soup.find("meta", {"property": "og:title"})
+        file_name = file_name["content"] if file_name else "Unknown File"
+
+        thumbnail = soup.find("meta", {"property": "og:image"})
+        thumbnail_url = thumbnail["content"] if thumbnail else None
+
+        file_size_tag = soup.find(string=lambda text: "MB" in text or "GB" in text)
+        file_size = file_size_tag.strip() if file_size_tag else "Unknown Size"
+
+        return {
+            "file_name": file_name,
+            "thumbnail_url": thumbnail_url,
+            "file_size": file_size,
+        }
+    except aiohttp.ClientError as e:
+        return {"error": f"Failed to fetch details: {str(e)}"}
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {str(e)}"}
 
 async def process_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Process a Terabox link, fetch details, and create a new URL with a button."""
@@ -95,6 +125,7 @@ async def process_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text(reply_text, reply_markup=reply_markup)
 
+        # Logging to channel
         if thumbnail_url:
             await context.bot.send_photo(
                 chat_id=LOG_CHANNEL_ID,
