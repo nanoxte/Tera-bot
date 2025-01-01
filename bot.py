@@ -9,13 +9,13 @@ BOT_TOKEN = "7289544815:AAHazCIKjEdiDcJb9LneDGGia-5Xpghbwl8"
 BASE_URL = "https://opabhik.serv00.net/Watch.php?url="
 TERABOX_PATTERN = r"https?://(?:\w+\.)?(terabox|1024terabox|freeterabox|teraboxapp|tera|teraboxlink|mirrorbox|nephobox|1024tera|momerybox|tibibox|terasharelink|teraboxshare|terafileshare)\.\w+"
 LOG_CHANNEL_ID = "-1001564742493"  # Replace with your actual log channel's username or chat ID
+FSUB_CHANNEL_ID = "-1002039807510"  # Replace with your force subscription channel ID or username
 FSubLink = "https://t.me/+Q8sRUuL-hzUwZGM1"  # Replace with your actual channel link
 
 async def check_subscription(user_id, bot):
     """Check if a user is a member of the required channel."""
     try:
-        channel_username = FSubLink.split("/")[-1]  # Extract the channel username from the link
-        member = await bot.get_chat_member(channel_username, user_id)
+        member = await bot.get_chat_member(FSUB_CHANNEL_ID, user_id)
         print(f"User {user_id} subscription status: {member.status}")  # Debugging
         return member.status in ["member", "administrator", "creator"]
     except Exception as e:
