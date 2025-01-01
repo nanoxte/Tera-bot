@@ -37,7 +37,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    image_url = "https://envs.sh/ozm.jpg"  # Replace with the URL or local path
+    image_url = "https://envs.sh/rhi.jpg"  # Replace with the URL or local path
     await update.message.reply_photo(
         photo=image_url,
         caption="👋 Hi! Welcome to the bot! Send a Terabox link, and I’ll create a stream link for you.",
