@@ -38,6 +38,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     image_url = "https://envs.sh/rhi.jpg"  # Replace with the URL or local path
+    
+    # Button that will be displayed below the image
+    button = InlineKeyboardButton("✨ Join Channel", url="https://t.me/+Q8sRUuL-hzUwZGM1")  # Replace with your desired URL
+    
+    # Creating an inline keyboard with the button
+    reply_markup = InlineKeyboardMarkup([[button]])
+
+    # Reply with image and button
     await update.message.reply_photo(
         photo=image_url,
         caption="👋 Hi! Welcome to the bot! Send a Terabox link, and I’ll create a stream link for you.",
