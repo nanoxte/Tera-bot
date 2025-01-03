@@ -5,12 +5,12 @@ import re
 import aiohttp  # Using aiohttp for async HTTP requests
 from web import keep_alive
 
-BOT_TOKEN = "7289544815:AAHazCIKjEdiDcJb9LneDGGia-5Xpghbwl8"
+BOT_TOKEN = "7050622921:AAGM6dXJKj78MRScyLdLvDXodUkmHn4n730"
 BASE_URL = "https://opabhik.serv00.net/Watch.php?url="
 TERABOX_PATTERN = r"https?://(?:\w+\.)?(terabox|1024terabox|freeterabox|teraboxapp|tera|teraboxlink|mirrorbox|nephobox|1024tera|momerybox|tibibox|terasharelink|teraboxshare|terafileshare)\.\w+"
-LOG_CHANNEL_ID = "-1001564742493"  # Replace with your actual log channel's username or chat ID
-FSUB_CHANNEL_ID = "-1002039807510"  # Replace with your force subscription channel ID or username
-FSubLink = "https://t.me/+Q8sRUuL-hzUwZGM1"  # Replace with your actual channel link
+LOG_CHANNEL_ID = "-1002252063312"  # Replace with your actual log channel's username or chat ID
+FSUB_CHANNEL_ID = "-1001911851456"  # Replace with your force subscription channel ID or username
+FSubLink = "https://t.me/+qdLjzK5bWoViOWQ1"  # Replace with your actual channel link
 
 async def check_subscription(user_id, bot):
     """Check if a user is a member of the required channel."""
@@ -40,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_url = "https://envs.sh/rhi.jpg"  # Replace with the URL or local path
     
     # Button that will be displayed below the image
-    button = InlineKeyboardButton("✨ Join Channel", url="https://t.me/+Q8sRUuL-hzUwZGM1")  # Replace with your desired URL
+    button = InlineKeyboardButton("✨ Join Channel", url="https://t.me/+qdLjzK5bWoViOWQ1")  # Replace with your desired URL
     
     # Creating an inline keyboard with the button
     reply_markup = InlineKeyboardMarkup([[button]])
